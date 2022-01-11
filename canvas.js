@@ -19,6 +19,10 @@ function mouseEvents(e){
         mouse.wheel += -e.deltaY;
         e.preventDefault();
     }
+    if(mouse.button = true){
+        //console.log(g.pos2sqr(mouse.x, mouse.y))
+        console.log(g.isInGrid(mouse.x, mouse.y))
+    }
 }
 
 //Adicionados Event Listeners
@@ -45,35 +49,29 @@ const panZoom = {
     },
 }
 
-function drawGrid(){
-    var scale, gridScale, size, x, y, limitedGrid = false;
-    gridScale = gridScreenSize;
-    size = Math.max(w, h) / panZoom.scale + gridScale * 2;
-    panZoom.toWorld(0,0, topLeft);
-    x = Math.floor(topLeft.x / gridScale) * gridScale;
-    y = Math.floor(topLeft.y / gridScale) * gridScale;
-    if (size / gridScale > gridLimit) {
-        size = gridScale * gridLimit;
-        limitedGrid = true;
+class grid{
+    constructor(x, y, w, h, n, m, lw, c){
+        this.x = x;
+        this.y = y
+        this.w = w;
+        this.h = h;
+        this.n = n;
+        this.m = m;
+        this.lw = lw;
+        this.c = c;
     }
-    panZoom.apply();
+    isInGrid(x, y){
+        return (inRange(x, this.x, this.x+(this.n-1)*this.w) && inRange(y, this.y, this.y+(this.m-1)*this.h))
+    }
+    pos2sqr(x, y){
+        if(!this.isInGrid(x, y)) return null;
+        var x = Math.floor((x-this.x)/this.w)
+        var y = Math.floor((y-this.y)/this.h)
+        return [x, y];
+    }
+}
 
-    //Faz as linhas da grid
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = c;
-    ctx.beginPath();
-    for (i = 0; i < size; i += gridScale) {
-        ctx.moveTo(x + i, y);
-        ctx.lineTo(x + i, y + size);
-        ctx.moveTo(x, y + i);
-        ctx.lineTo(x + size, y + i);
-    }
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset the transform so the lineWidth is 1
-    ctx.stroke();
-    
-    info.textContent = "Scale: 1px = " + (1/panZoom.scale).toFixed(4) + " world px ";
-    limitedGrid && (info.textContent += " Static grid limit " + (gridLimit * gridLimit) + " cells");    
-} 
+let g = new grid(400, 30, 35, 35, 20, 20, 1, "#000")
 
 class VirtualBoard{
     #highlight = {x:-1, y:-1} //Deve armazenar a posição, na grid, em que o mouse clicou. Seria bom visualizar essa posição com um 'highlight', logo chamei de highlight
@@ -144,7 +142,7 @@ class VirtualBoard{
         this.#write(`clk: {${mouse.x},${mouse.y}}`, 300, 60);
         this.#write(`scl: ${mouse.wheel}`, 300, 75);
         panZoom.apply()
-        this.#drawGrid(500, 500, 50, 50, 3, 3);
+        this.#drawGrid(g.x, g.y, g.w, g.h, g.n, g.m, g.c);
         panZoom.reset()
     }
 }
@@ -157,21 +155,7 @@ function getMousePos(canvas, evt){
         y: evt.clientY - rect.top
     };
 }
-/*
-canvas.addEventListener('mousemove', function(evt){ //Eventlistener que chama setMousePos
-    var pos = getMousePos(canvas, evt)
-    gameBoard.setMousePos(pos);
-    }, false);
 
-canvas.addEventListener('click', function(evt){ //Eventlistener que chama processClick
-    var pos = getMousePos(canvas, evt)
-    gameBoard.processClick(pos);
-    }, false);
-
-canvas.addEventListener('wheel', function(evt){ //Eventlistener que chama processClick
-    gameBoard.processWheel(evt.deltaY);
-    }, false);
-*/
 function draw(){
     //Limpa o canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -179,5 +163,10 @@ function draw(){
     gameBoard.draw();
 }
 setInterval(draw, 10)
+
+//Créditos: https://stackoverflow.com/questions/6454198/check-if-a-value-is-within-a-range-of-numbers
+function inRange(x, start, end) {
+    return ((x-start)*(x-end) <= 0);
+}
 
 
