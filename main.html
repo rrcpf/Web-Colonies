@@ -1,19 +1,131 @@
 <head>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="CSS/main.css">
 </head>
 <body>
-    <div id="board-container">
-        <canvas id="board"></div>
-        <script src="canvas.js">
-       </script>
-       </div>
-    <div id="nome-cidade">Nome Cidade</div>
-    <div id="lista-recursos">Lista de Recursos</div>
-    <div id="botoes-principal">
-        <button id="para-construcao" class="botao-circular"></button>
-        <button id="para-amigos" class="botao-circular"></button>
-        <button id="para-presentes" class="botao-circular"></button>
+    <div id="main" class="tela">
+        <div id="board-container">
+            <canvas id="board">
+            <script src="JS/canvas.js">
+           </script>
+        </div>
+        <div id="nome-cidade">Nome Cidade</div>
+        <div id="lista-recursos">Lista de Recursos</div>
+        <div id="botoes-principal">
+            <button id="para-construcao" class="botao-circular"><img class="icones" src="img/construcao.png"/></button>
+            <button id="para-amigos" class="botao-circular"><img class="icones" src="img/amigos.png"/></button>
+            <button id="para-presentes" class="botao-circular"><img class="icones" src="img/presentes.png"/></button>
+        </div>
+        <div id="pagina-amigos" class="hidden"></div>
+        <div id="pagina-presentes" class="hidden"></div>
     </div>
-    <div id="pagina-amigos" class="hidden"></div>
-    <div id="pagina-presentes" class="hidden"></div>
+    <div id="construcao" class="tela hidden">
+        <div id="board-container">
+            <div id="nome-cidade">Nome Cidade</div>
+            <div id="lista-recursos">Lista de Recursos</div>
+        
+            <table id="tabela-construcao">
+                <tr>
+                    <td class="coluna">Nome</td>
+                    <td class="coluna">Custo</td>
+                    <td class="coluna"><button class="botao-info">Info</button></td>
+                    <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
+                </tr>
+                <tr>
+                    <td class="coluna">Nome</td>
+                    <td class="coluna">Custo</td>
+                    <td class="coluna"><button class="botao-info">Info</button></td>
+                    <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
+                </tr>
+                <tr>
+                    <td class="coluna">Nome</td>
+                    <td class="coluna">Custo</td>
+                    <td class="coluna"><button class="botao-info">Info</button></td>
+                    <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
+                </tr>
+                <tr>
+                    <td class="coluna">Nome</td>
+                    <td class="coluna">Custo</td>
+                    <td class="coluna"><button class="botao-info">Info</button></td>
+                    <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="amigos" class="tela hidden">
+        <div id="board-container">
+            <div id="nome-usuario">Nome de Usuário</div>
+            <div id="botao-voltar">Voltar</div>
+            <table id="tabela-amigos">
+                <tr>
+                    <td class="coluna"><img src="img/online.png"/></td>
+                    <td class="coluna">Amigo 1</td>
+                    <td class="coluna"><img src="img/bloquear.png"/></td>
+                    <td class="coluna-visitar">Visitar</td>
+                </tr>
+                <tr>
+                    <td class="coluna"><img src="img/online.png"/></td>
+                    <td class="coluna">Amigo 2</td>
+                    <td class="coluna"><img src="img/bloquear.png"/></td>
+                    <td class="coluna-visitar">Visitar</td>
+                </tr>
+                <tr>
+                    <td class="coluna"><img src="img/offline.png"/></td>
+                    <td class="coluna">Amigo 3</td>
+                    <td class="coluna"><img src="img/bloquear.png"/></td>
+                    <td class="coluna-visitar">Visitar</td>
+                </tr>
+                <tr>
+                    <td class="coluna"><img src="img/offline.png"/></td>
+                    <td class="coluna">Amigo 4</td>
+                    <td class="coluna"><img src="img/bloquear.png"/></td>
+                    <td class="coluna-visitar">Visitar</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="presentes" class="tela hidden">
+        <div id="board-container">
+            <div id="botao-voltar">Voltar</div>
+            <table id="tabela-presentes">
+                <tr>
+                    <td class="coluna"><img src="img/online.png"/></td>
+                    <td class="coluna">Presente 1</td>
+                    <td class="coluna"><img src="img/resgatar.png"/></td>   
+                </tr>
+                <tr>
+                    <td class="coluna"><img src="img/online.png"/></td>
+                    <td class="coluna">Presente 2</td>
+                    <td class="coluna"><img src="img/resgatar.png"/></td>   
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="construir" class="tela hidden">
+        <div id="board-container">
+            <div id="nome-cidade">Nome Cidade</div>
+            <div id="lista-recursos">Lista de Recursos</div>
+            <div id="botoes-principal">
+                <button id="para-construcao" class="botao-cancela">Cancela</button>
+                <button id="para-amigos" class="botao-rotaciona">Rotaciona</button>
+                <button id="para-presentes" class="botao-confirma">Confirma</button>
+            </div>
+        </div>
+    </div>
+    <div id="info" class="tela hidden">
+        <div id="board-container">
+            <div id="nome-cidade">Nome Cidade</div>
+            <div id="lista-recursos">Lista de Recursos</div>
+            <table id="tabela-info">
+                <tr>
+                    <td class="coluna">Nome</td>
+                    <td class="coluna">Custo</td>
+                    <td class="coluna"><button class="botao-construir">Construir</button></td>
+                </tr>
+                <tr>
+                    <td class="coluna"><img src="img/online.png"/></td> 
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="JS/telas.js"></script>
 </body>
