@@ -1,0 +1,41 @@
+#cadastro {
+    position: absolute;
+    display: flex;
+    border: 2px solid rgb(87, 86, 86);
+    background-color: rgb(100, 155, 220, 0.4);
+    padding: 10px;
+    margin: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 16%;
+    top: 50%;
+    right: 50%;
+    -ms-transform: translate( 50%, -50%);
+    transform: translate( 50%, -50%)
+
+}
+
+#cadastro > label {
+    flex: 1;
+    margin: 5px;
+}
+
+#cadastro > input {
+    flex: 2;
+    margin: 5px;
+}
+
+#cadastro > a {
+    margin: 15px;
+}
+
+h1 {
+    border: 2px solid rgb(87, 86, 86);
+    background-color: rgb(100, 155, 220, 0.4);
+    margin-top: 0;
+    padding: 5px;
+    margin-right: auto;
+    text-align: center;
+}
