@@ -72,7 +72,7 @@ class grid{
     }
 }
 
-let g = new grid(400, 30, 35, 35, 20, 20, 1, "#000")
+let g = new grid(canvas.width/2-35*10, canvas.height/2-35*11, 35, 35, 20, 20, 1, "#000")
 
 class VirtualBoard{
     #highlight = {x:-1, y:-1} //Deve armazenar a posição, na grid, em que o mouse clicou. Seria bom visualizar essa posição com um 'highlight', logo chamei de highlight
