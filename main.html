@@ -1,27 +1,30 @@
+<!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
+    <title>Web Colonies - Login</title>
+    <link rel="stylesheet" href="./CSS/layout.css">
+    <link rel="icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="CSS/main.css">
 </head>
 <body>
     <div id="main" class="tela">
-        <div id="board-container">
+        <div class="board-container">
             <canvas id="board">
             <script src="JS/canvas.js">
            </script>
         </div>
-        <div id="nome-cidade">Nome Cidade</div>
-        <div id="lista-recursos">Lista de Recursos</div>
-        <div id="botoes-principal">
-            <button id="para-construcao" class="botao-circular"><img class="icones" src="img/construcao.png"/></button>
-            <button id="para-amigos" class="botao-circular"><img class="icones" src="img/amigos.png"/></button>
-            <button id="para-presentes" class="botao-circular"><img class="icones" src="img/presentes.png"/></button>
+        <div class="nome-cidade">Nome Cidade</div>
+        <div class="lista-recursos">Lista de Recursos</div>
+        <div class="botoes-principal">
+            <button class="botao-circular para-construcao"><img class="icones" src="img/construcao.png"/></button>
+            <button class="botao-circular para-amigos"><img class="icones" src="img/amigos.png"/></button>
+            <button class="botao-circular para-presentes"><img class="icones" src="img/presentes.png"/></button>
         </div>
-        <div id="pagina-amigos" class="hidden"></div>
-        <div id="pagina-presentes" class="hidden"></div>
     </div>
     <div id="construcao" class="tela hidden">
-        <div id="board-container">
-            <div id="nome-cidade">Nome Cidade</div>
-            <div id="lista-recursos">Lista de Recursos</div>
+        <div class="board-container">
+            <div class="nome-cidade">Nome Cidade</div>
+            <div class="lista-recursos">Lista de Recursos</div>
         
             <table id="tabela-construcao">
                 <tr>
@@ -49,43 +52,48 @@
                     <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
                 </tr>
             </table>
+            <div class="botoes-principal">
+                <button class="botao-voltar para-main">Voltar</button>
+            </div>
         </div>
     </div>
     <div id="amigos" class="tela hidden">
-        <div id="board-container">
+        <div class="board-container">
             <div id="nome-usuario">Nome de Usuário</div>
-            <div id="botao-voltar">Voltar</div>
             <table id="tabela-amigos">
                 <tr>
                     <td class="coluna"><img src="img/online.png"/></td>
                     <td class="coluna">Amigo 1</td>
                     <td class="coluna"><img src="img/bloquear.png"/></td>
-                    <td class="coluna-visitar">Visitar</td>
+                    <td class="coluna-visitar"><button class="botao-visitar">Visitar</button></td>
                 </tr>
                 <tr>
                     <td class="coluna"><img src="img/online.png"/></td>
                     <td class="coluna">Amigo 2</td>
                     <td class="coluna"><img src="img/bloquear.png"/></td>
-                    <td class="coluna-visitar">Visitar</td>
+                    <td class="coluna-visitar"><button class="botao-visitar">Visitar</button></td>
                 </tr>
                 <tr>
                     <td class="coluna"><img src="img/offline.png"/></td>
                     <td class="coluna">Amigo 3</td>
                     <td class="coluna"><img src="img/bloquear.png"/></td>
-                    <td class="coluna-visitar">Visitar</td>
+                    <td class="coluna-visitar"><button class="botao-visitar">Visitar</button></td>
                 </tr>
                 <tr>
                     <td class="coluna"><img src="img/offline.png"/></td>
                     <td class="coluna">Amigo 4</td>
                     <td class="coluna"><img src="img/bloquear.png"/></td>
-                    <td class="coluna-visitar">Visitar</td>
+                    <td class="coluna-visitar"><button class="botao-visitar">Visitar</button></td>
                 </tr>
             </table>
+            <div class="botoes-principal">
+                <button class="botao-voltar para-main">Voltar</button>
+                <button class="botao-circular para-adicionar"><img class="icones" src="img/adicionar.png"/></button>
+            </div>
         </div>
     </div>
     <div id="presentes" class="tela hidden">
-        <div id="board-container">
-            <div id="botao-voltar">Voltar</div>
+        <div class="board-container">
             <table id="tabela-presentes">
                 <tr>
                     <td class="coluna"><img src="img/online.png"/></td>
@@ -98,33 +106,77 @@
                     <td class="coluna"><img src="img/resgatar.png"/></td>   
                 </tr>
             </table>
+            <div class="botoes-principal">
+                <button class="botao-voltar para-main">Voltar</button>
+            </div>
         </div>
     </div>
     <div id="construir" class="tela hidden">
-        <div id="board-container">
-            <div id="nome-cidade">Nome Cidade</div>
-            <div id="lista-recursos">Lista de Recursos</div>
-            <div id="botoes-principal">
-                <button id="para-construcao" class="botao-cancela">Cancela</button>
-                <button id="para-amigos" class="botao-rotaciona">Rotaciona</button>
-                <button id="para-presentes" class="botao-confirma">Confirma</button>
+        <div class="board-container">
+            <div class="nome-cidade">Nome Cidade</div>
+            <div class="lista-recursos">Lista de Recursos</div>
+            <div class="botoes-principal">
+                <button id="construir-cancelar" class="botao-cancelar para-main">Cancelar</button>
+                <button id="construir-rotacionar" class="botao-rotacionar">Rotacionar</button>
+                <button id="construir-confirma" class="botao-confirmar para-main">Confirmar</button>
             </div>
         </div>
     </div>
     <div id="info" class="tela hidden">
-        <div id="board-container">
-            <div id="nome-cidade">Nome Cidade</div>
-            <div id="lista-recursos">Lista de Recursos</div>
+        <div class="board-container">
+            <div class="nome-cidade">Nome Cidade</div>
+            <div class="lista-recursos">Lista de Recursos</div>
             <table id="tabela-info">
                 <tr>
                     <td class="coluna">Nome</td>
                     <td class="coluna">Custo</td>
-                    <td class="coluna"><button class="botao-construir">Construir</button></td>
+                    <td class="coluna-construir"><button class="botao-construir">Construir</button></td>
                 </tr>
                 <tr>
-                    <td class="coluna"><img src="img/online.png"/></td> 
+                    <td colspan="3" class="coluna descricao">Descricao</td> 
                 </tr>
             </table>
+            <div class="botoes-principal">
+                <button  class="botao-voltar para-construcao">Voltar</button>
+            </div>
+        </div>
+    </div>
+    <div id="visitar-cidade" class="tela hidden">
+        <div class="board-container">
+            <div class="nome-cidade">Nome Cidade Visitada</div>
+            <div class="botoes-principal">
+                <button class="visitar-voltar">Voltar</button>
+                <button class="botao-circular para-amigos"><img class="icones" src="img/amigos.png"/></button>
+            </div>
+        </div>
+    </div>
+    <div id="adicionar" class="tela hidden">
+        <div class="board-container">
+            <table id="tabela-busca">
+                <tr>
+                    <td class="coluna" colspan="3"><input type="text"/></td>
+                    <td class="coluna"><img src="img/procurar.png"/></td>
+                </tr>
+                <tr>
+                    <td class="coluna" colspan="3">Resultado 1</td>
+                    <td class="coluna"><img src="img/convidar.png"/></td>
+                </tr>
+                <tr>
+                    <td class="coluna" colspan="3">Resultado 2</td>
+                    <td class="coluna"><img src="img/convidar.png"/></td>
+                </tr>
+                <tr>
+                    <td class="coluna" colspan="3">Resultado 3</td>
+                    <td class="coluna"><img src="img/convidar.png"/></td>
+                </tr>
+                <tr>
+                    <td class="coluna" colspan="3">Resultado 4</td>
+                    <td class="coluna"><img src="img/convidar.png"/></td>
+                </tr>
+            </table>
+            <div class="botoes-principal">
+                <button class="botao-voltar para-amigos">Voltar</button>
+            </div>
         </div>
     </div>
     <script src="JS/telas.js"></script>

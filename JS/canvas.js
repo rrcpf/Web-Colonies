@@ -19,9 +19,10 @@ function mouseEvents(e){
         mouse.wheel += -e.deltaY;
         e.preventDefault();
     }
-    if(mouse.button = true){
-        //console.log(g.pos2sqr(mouse.x, mouse.y))
-        console.log(g.isInGrid(mouse.x, mouse.y))
+    if(mouse.button == true){
+        gameBoard.processClick();
+        mouse.lastX = mouse.x
+        mouse.lastY = mouse.y
     }
 }
 
@@ -61,7 +62,7 @@ class grid{
         this.c = c;
     }
     isInGrid(x, y){
-        return (inRange(x, this.x, this.x+(this.n-1)*this.w) && inRange(y, this.y, this.y+(this.m-1)*this.h))
+        return (inRange(x, this.x, this.x+(this.n)*this.w-1) && inRange(y, this.y, this.y+(this.m)*this.h-1))
     }
     pos2sqr(x, y){
         if(!this.isInGrid(x, y)) return null;
@@ -71,7 +72,7 @@ class grid{
     }
 }
 
-let g = new grid(400, 30, 35, 35, 20, 20, 1, "#000")
+let g = new grid(canvas.width/2-35*10, canvas.height/2-35*11, 35, 35, 20, 20, 1, "#000")
 
 class VirtualBoard{
     #highlight = {x:-1, y:-1} //Deve armazenar a posição, na grid, em que o mouse clicou. Seria bom visualizar essa posição com um 'highlight', logo chamei de highlight
@@ -88,15 +89,6 @@ class VirtualBoard{
         //Não fiz nada disso, logo a função está em branco.
 
         //TODO
-    }
-    processWheel(delta){
-        //Essa função deve interpretar onde na grid que um click foi feito, e chamar as funções necessárias uma vez que o click for efetuado.
-        //Se o click for feito numa posição válida, as coordenadas de highlight devem ser mudadas.
-        //Não fiz nada disso, logo a função está em branco.
-        let zoom = 0.0125*delta;
-        if (zoom+this.#scale >= 0.25 && zoom+this.#scale <= 3){
-            this.#scale+=zoom;
-        }
     }
     #initboard = function(){
         //O propósito dessa função seria inicialializar a grid com alguns Buildings. Não cheguei nessa parte da lógica ainda
@@ -138,11 +130,18 @@ class VirtualBoard{
 
         //TODO: praticamente tudo. Não sei o quão útil pode ser, mas achei isso aqui: https://stackoverflow.com/questions/53310138/creating-a-draggable-and-scaleable-grid-in-html5
         //this.#drawRect(50, 50, 100, 100, "#000000");
-        this.#write(`pos: {${panZoom.x},${panZoom.y}}`, 300, 45);
-        this.#write(`clk: {${mouse.x},${mouse.y}}`, 300, 60);
-        this.#write(`scl: ${mouse.wheel}`, 300, 75);
+        //this.#write(`pos: {${panZoom.x},${panZoom.y}}`, 300, 45);
+        //this.#write(`clk: {${mouse.x},${mouse.y}}`, 300, 60);
+        //this.#write(`scl: ${mouse.wheel}`, 300, 75);
         panZoom.apply()
         this.#drawGrid(g.x, g.y, g.w, g.h, g.n, g.m, g.c);
+        //Highlight
+        if(g.isInGrid(mouse.x, mouse.y))
+            this.#drawRect(g.x+g.w*g.pos2sqr(mouse.x, mouse.y)[0],g.y+g.h*g.pos2sqr(mouse.x, mouse.y)[1], g.w, g.h, "#CFEDED")
+        //Selection
+        if(g.isInGrid(mouse.lastX, mouse.lastY))
+            this.#drawRect(g.x+g.w*g.pos2sqr(mouse.lastX, mouse.lastY)[0],g.y+g.h*g.pos2sqr(mouse.lastX, mouse.lastY)[1], g.w, g.h, "#AFCFAF")
+        this.#drawRect();
         panZoom.reset()
     }
 }
