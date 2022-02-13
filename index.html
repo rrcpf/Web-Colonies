@@ -9,15 +9,29 @@
 <body>
     <h1>Bem vindo a Web Colonies</h1>
     <div id="login">
-        <label for="username">Username: </label>
-        <input type="text" id ="username">
+        <form action="main.html">
+            <p>
+                <label for="username">Username: </label>
+                <input type="text" id ="username">
+            </p>
+            
+            <p>
+                <label for="userPassword">Password: </label>
+                <input type="password" id ="userPassword">
+            </p>
 
-        <label for="userPassword">Password: </label>
-        <input type="password" id ="userPassword">
+            <p>
+            <input type="submit" value="Login" id="botaoLogin">
+            </p>
 
-        <a href="./cadastro.html">Create account</a>
+        </form>
+        <p>
+            <a href="./cadastro.html">Create account</a>
+        </p>
 
-        <input type="submit" value="Login" id="botaoLogin">
+        <p>
+            <a href="./esqueceuSenha.html">Forgot your password?</a>
+        </p>
     </div> 
     <script src="./JS/login.js"></script>
 </body>

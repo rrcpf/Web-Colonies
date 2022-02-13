@@ -3,5 +3,20 @@ body {
     margin: 0;
 }
 
+form { 
+    display: table;
+}
+
+p { 
+    display: table-row;
+}
+
+label {
+     display: table-cell;
+}
+
+input {
+     display: table-cell;
+}
 
 

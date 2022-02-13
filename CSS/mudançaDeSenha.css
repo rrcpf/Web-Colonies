@@ -1,4 +1,4 @@
-#login {
+#changePassword {
     position:absolute;
     display: flex;
     border: 2px solid rgb(87, 86, 86);
@@ -17,13 +17,14 @@
 
 }
 
-#login > label {
+#changePassword  > label {
     flex: 1;
-    
+    margin: 5px;
 }
 
-#login > input {
+#changePassword  > input {
     flex: 2;
+    margin: 5px;
 }
 
 
