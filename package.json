@@ -1,0 +1,6 @@
+{
+    "name": "web-colonies",
+    "version": "1.0.0",
+    "description": "An online colony simulator in space",
+    "private": true
+}
