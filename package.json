@@ -1,6 +1,23 @@
 {
-    "name": "web-colonies",
-    "version": "1.0.0",
-    "description": "An online colony simulator in space",
-    "private": true
+  "name": "web-colonies",
+  "version": "1.0.0",
+  "description": "An online space colony simulator",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrcpf/Web-Colonies.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rrcpf/Web-Colonies/issues"
+  },
+  "homepage": "https://github.com/rrcpf/Web-Colonies#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
