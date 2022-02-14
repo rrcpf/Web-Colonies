@@ -75,7 +75,7 @@ class grid{
         ctx.lineWidth = 1;
         ctx.strokeStyle = this.c;
         ctx.beginPath();
-        for (var i = 0; i <= n; i += 1) {
+        for (var i = 0; i <= this.n; i += 1) {
             ctx.moveTo(this.x + i*this.w, this.y);
             ctx.lineTo(this.x + i*this.w, this.y + this.h*this.m);
             ctx.moveTo(this.x,       this.y + i*this.h);
@@ -137,7 +137,7 @@ class VirtualBoard{
             this.#drawRect(g.x+g.w*g.pos2sqr(mouse.lastX, mouse.lastY)[0],g.y+g.h*g.pos2sqr(mouse.lastX, mouse.lastY)[1], g.w, g.h, "#AFCFAF")
         this.#drawRect();
         //Buildings
-        for (i=0; i<this.#buildings.length; i++){
+        for (let i=0; i<this.#buildings.length; i++){
             b = this.#buildings[i]
             this.#drawRect(b.x, b.y, g.w, g.y, b.c)
         }
