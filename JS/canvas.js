@@ -1,4 +1,4 @@
-var canvas = document.getElementById("board");
+ var canvas = document.getElementById("board");
 canvas.width = window.screen.availWidth;
 canvas.height = window.screen.availHeight;
 var ctx = canvas.getContext("2d");
@@ -70,6 +70,20 @@ class grid{
         var y = Math.floor((y-this.y)/this.h)
         return [x, y];
     }
+    draw(){
+        //Faz as linhas da grid
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = this.c;
+        ctx.beginPath();
+        for (var i = 0; i <= n; i += 1) {
+            ctx.moveTo(this.x + i*this.w, this.y);
+            ctx.lineTo(this.x + i*this.w, this.y + this.h*this.m);
+            ctx.moveTo(this.x,       this.y + i*this.h);
+            ctx.lineTo(this.x + this.n*this.w, this.y + i*this.h);
+        }
+        //ctx.setTransform(1, 0, 0, 1, 0, 0); // reset the transform so the lineWidth is 1
+        ctx.stroke();
+    }
 }
 
 let g = new grid(canvas.width/2-35*10, canvas.height/2-35*11, 35, 35, 20, 20, 1, "#000")
@@ -79,20 +93,14 @@ class VirtualBoard{
     #selectedBuilding = null //Deve armazenar o building selecionado.
     #scale = 1;
     #pos = {x:0, y:0};
+    #buildings = [];
     constructor(){
         //this.board = new BoardData();
-        this.#initboard();
+        
     }
-    processClick(pos){
-        //Essa função deve interpretar onde na grid que um click foi feito, e chamar as funções necessárias uma vez que o click for efetuado.
-        //Se o click for feito numa posição válida, as coordenadas de highlight devem ser mudadas.
-        //Não fiz nada disso, logo a função está em branco.
-
-        //TODO
-    }
-    #initboard = function(){
+    addPiece(b){
         //O propósito dessa função seria inicialializar a grid com alguns Buildings. Não cheguei nessa parte da lógica ainda
-
+        this.#buildings.push(b)
         //TODO
     }
     #drawRect = function(x, y, w, h, fill="#FF9999"){ //Função privada que desenha um retângulo arbitrário, com posição (x,y), dimensões (w,h), e cor (fill)
@@ -105,20 +113,6 @@ class VirtualBoard{
     #drawImage = function(id, x, y, w, h){ //Função privada que imprime uma imagem no canvas, na posição e dimensões especificadas
         let img = document.getElementById(id)
         ctx.drawImage(img, x, y, w, h)
-    }
-    #drawGrid = function(x, y, w, h, n, m, c="#000"){
-        //Faz as linhas da grid
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = c;
-        ctx.beginPath();
-        for (var i = 0; i <= n; i += 1) {
-            ctx.moveTo(x + i*w, y);
-            ctx.lineTo(x + i*w, y + h*m);
-            ctx.moveTo(x,       y + i*h);
-            ctx.lineTo(x + n*w, y + i*h);
-        }
-        //ctx.setTransform(1, 0, 0, 1, 0, 0); // reset the transform so the lineWidth is 1
-        ctx.stroke();
     }
     #write = function(val, x, y, fnt="12px Arial", fill="#222222"){  //Função privada que imprime texto no canvas
         ctx.fillStyle = fill;
@@ -134,7 +128,7 @@ class VirtualBoard{
         //this.#write(`clk: {${mouse.x},${mouse.y}}`, 300, 60);
         //this.#write(`scl: ${mouse.wheel}`, 300, 75);
         panZoom.apply()
-        this.#drawGrid(g.x, g.y, g.w, g.h, g.n, g.m, g.c);
+        g.draw();
         //Highlight
         if(g.isInGrid(mouse.x, mouse.y))
             this.#drawRect(g.x+g.w*g.pos2sqr(mouse.x, mouse.y)[0],g.y+g.h*g.pos2sqr(mouse.x, mouse.y)[1], g.w, g.h, "#CFEDED")
@@ -142,6 +136,11 @@ class VirtualBoard{
         if(g.isInGrid(mouse.lastX, mouse.lastY))
             this.#drawRect(g.x+g.w*g.pos2sqr(mouse.lastX, mouse.lastY)[0],g.y+g.h*g.pos2sqr(mouse.lastX, mouse.lastY)[1], g.w, g.h, "#AFCFAF")
         this.#drawRect();
+        //Buildings
+        for (i=0; i<this.#buildings.length; i++){
+            b = this.#buildings[i]
+            this.#drawRect(b.x, b.y, g.w, g.y, b.c)
+        }
         panZoom.reset()
     }
 }
